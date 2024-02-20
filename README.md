@@ -1,54 +1,30 @@
-# Smart Project
+# Smart Platform
 
-Smart Project is a prototype web application aimed at teachers and students for sharing knowledge and publishing their work. The project implements a microservices architecture and uses gRPC communication between the services.
+## Overview
 
-## Microservices Architecture
+Smart Platform is a prototype web application designed to enhance the educational experience for teachers and students. It facilitates knowledge sharing and the publishing of academic work, leveraging a modular architecture where each application component offers dedicated REST APIs. Developed with Django, the platform aims for scalability and ease of use, providing a robust framework for educational content management and collaboration.
 
-The project is designed using a microservices architecture and consists of four distinct services:
+## Key Features
 
-1. User Management: Handles user registration, authentication, and profile editing, leveraging Google authentication for easy access.
-2. Content Management: Facilitates creating and managing various types of content, ensuring seamless organization and distribution.
-3. Courses: A dedicated service for managing courses, enabling course creation, lesson management, and related functionalities.
-4. Analytics: Gathers data from user behavior, analyzes the information, and visualizes the data in real-time, providing insights into user engagement and preferences.
-
-Each service is responsible for different aspects of the application, promoting maintainability and scalability as the project grows.
+- **Modular Application Design**: Organized into distinct applications, each serving specific functionality through RESTful APIs.
+- **Knowledge Sharing**: Tools and interfaces designed to promote the sharing of educational content among users.
+- **Content Publishing**: Enables teachers and students to publish their academic work, making it accessible to a wider audience.
+- **Future-Proof Architecture**: Plans for further scalability include service separation, dedicated databases, reverse proxy integration, and message queue communication.
 
 ## Technologies
 
-- Django
-- gRPC
-- Bootstrap CSS
-- PostgreSQL
-- Redis
-- Channels
+- **Backend Framework**: Django
+- **APIs**: Django Rest Framework for building RESTful services
+- **Database**: SQLite (with plans to expand to multiple database support)
+- **Frontend**: Vanilla JavaScript (considerations for future expansion)
+- **Deployment & Networking**: Plans for Docker containerization, reverse proxy setup, and message queue implementation for service communication
 
-## Installation
+## Project Status
 
-1. Clone the repository: `git clone https://github.com/YonatanLevyn/smart_proj.git`
-2. Create and activate a virtual environment: `python -m venv venv_site` and `source venv_site/bin/activate`
-3. Install the requirements: `pip install -r requirements.txt`
-4. Configure the `settings.py` file with your local environment variables. For demo mode, you only need to provide the `DJANGO_SECRET_KEY`. See [Configuration](#configuration) for more details.
-5. Run the Django application using Daphne: `daphne site_proj.asgi:application`
+This project is currently in the development phase, with core functionalities implemented and ongoing work to enhance scalability, performance, and user experience. Future updates will focus on:
 
-## Configuration
-
-Before running the application, you'll need to configure the application with your local environment variables. 
-For demo mode, you'll need to provide just one environment variable:
-
-- `DJANGO_SECRET_KEY`: Django secret key
-
-You can set this environment variable in your `.env.example` file and renaming it to `.env`.
-
-For full mode, you'll need to provide additional environment variables related to Google authentication and PostgreSQL configuration. You can find these in the `.env.example` file. Remember to set the `DEMO_MODE` line in the `.env` file to `False` when using the full mode.
-
-Once the environment variables are set, you can proceed to run the application.
-
-
-## Contributing
-
-Feel free to contribute to the project by opening issues, suggesting improvements, or submitting pull requests.
-
-## License
-
-This project is open-source and available under the [MIT License](https://opensource.org/licenses/MIT).
+- **Service Separation**: Refactoring the platform to support microservices architecture for improved scalability and maintenance.
+- **Database Expansion**: Transitioning to a multi-database setup to optimize data management and storage solutions.
+- **Advanced Communication**: Implementing a message queue for efficient service-to-service communication.
+- **Enhanced User Experience**: Continuous improvements to the frontend to make the platform more intuitive and user-friendly.
 
