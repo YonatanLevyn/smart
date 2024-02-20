@@ -24,7 +24,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 DEBUG = True
 ALLOWED_HOSTS = ['*']
 
-AUTH_USER_MODEL = "user_management.CustomUser"
+AUTH_USER_MODEL = "user.User"
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
@@ -34,12 +34,14 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.sessions',
     'django.contrib.messages',
+     # corsheaders is required for cross-origin requests from the frontend
+    'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
-    'user_management',
+    'user',
     'courses',
-    'corsheaders',
 ]
 
 MIDDLEWARE = [

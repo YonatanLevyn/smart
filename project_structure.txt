@@ -6,7 +6,7 @@ SMART/
 |   |   |-- settings.py
 |   |   |-- urls.py
 |   |   |-- wsgi.py
-|   |-- user_management/
+|   |-- user/
 |   |   |-- __pycache__/
 |   |   |-- migrations/
 |   |   |-- __init__.py
@@ -36,15 +36,24 @@ SMART/
 |-- client-side/
 |   |-- static/
 |   |   |-- css/
+|   |   |   |-- profile.css
 |   |   |   |-- styles.css
 |   |-- templates/
-|   |   |-- user_management/
-|   |   |   |-- (all user_management templates)
-|   |   |-- courses/
-|   |   |   |-- (all courses templates)
+|   |   |-- user/
+|   |   |   |-- base.html
+|   |   |   |-- homepage.html
+|   |   |   |-- update_introduction.html
+|   |   |   |-- profile.html
+|   |   |-- login.html
 |   |-- js/
-|   |   |-- user_management/
-|   |   |   |-- (JavaScript files corresponding to user_management templates)
-|   |   |-- courses/
-|   |   |   |-- (JavaScript files corresponding to courses templates)
+|   |   |-- homepage.js
+|   |   |-- login_allauth.js
+|   |   |-- login.js
+|   |   |-- main.js
+|   |   |-- profile.js
+|   |   |-- update_introduction.js
+
+
+
+
 
