@@ -16,7 +16,7 @@ class CourseViewSet(ModelViewSet):
 
 
 class LessonViewSet(ModelViewSet):
-    queryset = Lesson.objects.all()
+    queryset = Lesson.objects.select_related('course').all()
     serializer_class = LessonSerializer
     permission_classes = [IsAuthenticated]
 

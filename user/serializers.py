@@ -8,7 +8,6 @@ from rest_framework import serializers
 from .models import User
 
 # This serializer is used when you want to represent User instances. 
-# It can be useful when you want to return user data but prevent certain fields from being modified.
 class UserSerializer(serializers.ModelSerializer):
     # Meta class automatically generates fields and validators based on the model
     class Meta:
