@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.staticfiles',
      # corsheaders is required for cross-origin requests from the frontend
     'corsheaders',
     'rest_framework',
@@ -106,6 +107,13 @@ CORS_ALLOWED_ORIGINS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+STATIC_URL = '/static/'
+
+# Add this line if you haven't already, especially if you're in a development environment
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -121,3 +129,6 @@ TEMPLATES = [
         },
     },
 ]
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_FROM_EMAIL = 'johnlevhum@gmail.com'
