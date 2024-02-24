@@ -2,8 +2,8 @@ from rest_framework import serializers
 from .models import Course, Lesson
 
 class CourseSerializer(serializers.ModelSerializer): 
-    # Use ReadOnlyField to display the username of the user who created the course.
-    # This ensures the field is read-only and not subject to modification via the API.
+    # with 'source='created_by.username' we can serialize a specific attribute of a related object
+    # rather than the entire object (User in that case)
     created_by = serializers.ReadOnlyField(source='created_by.username')
 
     class Meta:
@@ -14,10 +14,8 @@ class CourseSerializer(serializers.ModelSerializer):
 
 class LessonSerializer(serializers.ModelSerializer):
 
-    # SerializerMethodField is used here to include the title of the associated course
-    # without initiating new queries for each lesson, assuming the course data is prefetched.
-    # it is used here insted of nested serializer because
-    # we need just a single piece of information from the related object 
+    # SerializerMethodField is used here to include the title of the associated course without initiating new queries for each lesson.
+    # nested serializer also could have worked but we need just a single piece of information from the object 
     course_title = serializers.SerializerMethodField()
 
     def get_course_title(self, obj):

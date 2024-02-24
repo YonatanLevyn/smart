@@ -61,3 +61,4 @@ class CourseViewSetTestCase(APITestCase):
     def test_delete_lesson(self):
         response = self.client.delete(reverse('lesson-detail', kwargs={'pk': self.lesson.pk}))
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
