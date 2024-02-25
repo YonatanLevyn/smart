@@ -10,6 +10,10 @@ such as email, username, password, etc.
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.utils import timezone
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
+from django.contrib.auth.password_validation import validate_password
+
 
 class UserManager(BaseUserManager):
     """
@@ -21,37 +25,41 @@ class UserManager(BaseUserManager):
     def create_user(self, email, username=None, password=None):
         if not email:
             raise ValueError('Users must have an email address')
+        
+        try:
+            validate_email(email)
+        except ValidationError:
+            raise ValueError('Invalid email address')
+        
         if not username:
-            # set the username to the first part of the email address if no username is provided
             username = email.split('@')[0]
 
-        # create a new instance of the user model
-        # self.model automatically works with whichever model it's called on
-        user = self.model(
-            ## normalize_email() method to convert the email to all lowercase
-            email = self.normalize_email(email),
-            username = self.model.normalize_username(username)
-        )
+        if password is not None:
+            try:
+                validate_password(password)
+            except ValidationError as e:
+                raise ValueError(', '.join(e.messages))
+        else:
+            raise ValueError('Password cannot be null')
 
+        email = self.normalize_email(email)
+        user = self.model(email=email, username=username)
+        
         # handles the process of hashing the password and storing it securely
         """This approach differs from directly using Django's create method by 
             providing a secure way to handle password storage"""
         user.set_password(password)
-
-        # save() method to save the user object to the database
         user.save(using=self._db)
-
         return user
 
     def create_superuser(self, email, username=None, password=None):
-        user = self.create_user(
-            email,
-            password=password,
-            username=username,
-        )
-        # superuser is a user who has all permissions enabled
+        user = self.create_user(email,username=username,password=password)
+
+        # The is_superuser flag grants the user all permissions automatically, bypassing all permission checks
         # for example, a superuser can view all objects in the database and edit them
         user.is_superuser = True
+
+        # Save the changes to the superuser
         user.save(using=self._db)
         return user
 
@@ -68,7 +76,6 @@ class User(AbstractBaseUser):
     is_superuser = models.BooleanField(default=False)
     date_joined = models.DateTimeField(default=timezone.now)
 
-
     # telling Django to use our custom UserManager
     objects = UserManager()
 
@@ -80,16 +87,4 @@ class User(AbstractBaseUser):
 
     def __str__(self):
         return self.email
-
-    # Does the user have a specific permission? (Yes, if superuser)
-    def has_perm(self, perm, obj=None):
-        return self.is_superuser
-
-    # Does this user have permission to view this app? (ALWAYS YES FOR THE MOMENT)
-    def has_module_perms(self, app_label):
-        return True
     
-    @staticmethod
-    def normalize_username(username):
-        "Normalize the username by making it lowercase"
-        return username.lower()
