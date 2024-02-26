@@ -102,14 +102,13 @@ USE_TZ = True
 
 # CORS settings
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # Adjust this to match the domain of your client-side app
+    "http://localhost:3000",  # Adjust this to match the domain of the client-side app
 ]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATIC_URL = '/static/'
 
-# Add this line if you haven't already, especially if you're in a development environment
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
@@ -130,5 +129,4 @@ TEMPLATES = [
     },
 ]
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-DEFAULT_FROM_EMAIL = 'johnlevhum@gmail.com'
+EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
