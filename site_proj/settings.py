@@ -14,10 +14,10 @@ from dotenv import load_dotenv
 from pathlib import Path
 
 # load the variables from the .env file
-env_path = Path('.') / '.env'
-load_dotenv(dotenv_path=env_path)
+load_dotenv()
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# dynamically determines the base directory of the project by starting 
+# from the location of the settings.py file and moving up two directories.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
@@ -37,8 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-     # corsheaders is required for cross-origin requests from the frontend
-    'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
     'user',
@@ -46,7 +44,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -56,10 +53,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'site_proj.urls'
 
-# ASGI settings
 ASGI_APPLICATION = 'site_proj.asgi.application'
 
-# REST Framework settings
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
@@ -68,13 +63,25 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ),
 }
-
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+"""
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
+    }
+}
+
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
@@ -93,16 +100,6 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
-]
-
-LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
-USE_I18N = True
-USE_TZ = True
-
-# CORS settings
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # Adjust this to match the domain of the client-side app
 ]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
