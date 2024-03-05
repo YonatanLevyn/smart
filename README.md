@@ -13,11 +13,27 @@ Smart Platform is a prototype web application designed to enhance the educationa
 
 ## Technologies
 
-- **Backend Framework**: Django
-- **APIs**: Django Rest Framework for building RESTful services
-- **Database**: SQLite (with plans to expand to multiple database support)
-- **Frontend**: Vanilla JavaScript (considerations for future expansion)
-- **Deployment & Networking**: Plans for Docker containerization, reverse proxy setup, and message queue implementation for service communication
+- **Backend**: Django
+- **APIs**: Django Rest Framework
+- **Database**: PostgreSQL for robust, scalable data storage solutions
+- **Web Server**: Nginx, configured for HTTPS, ensuring secure, encrypted communications
+- **Frontend**: Modular JavaScript, with considerations for future framework integration
+
+## Detailed Component Overview
+
+### User Application
+
+The User app manages all aspects related to user authentication, registration, and profile management. It offers a RESTful API for user operations.
+
+### Courses Application
+
+The Courses app is designed to facilitate academic course management and access. 
+
+## Deployment and Configuration
+
+### Nginx and HTTPS
+
+Nginx serves as the web server and reverse proxy, configured to handle HTTPS connections. The configuration involves setting up SSL (self signed) certificate and directing HTTP traffic to HTTPS, ensuring all communications are secure.
 
 ## Project Status
 
@@ -25,6 +41,5 @@ This project is currently in the development phase, with core functionalities im
 
 - **Service Separation**: Refactoring the platform to support microservices architecture for improved scalability and maintenance.
 - **Database Expansion**: Transitioning to a multi-database setup to optimize data management and storage solutions.
-- **Advanced Communication**: Implementing a message queue for efficient service-to-service communication.
-- **Enhanced User Experience**: Continuous improvements to the frontend to make the platform more intuitive and user-friendly.
+
 
