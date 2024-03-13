@@ -6,9 +6,7 @@ which is suitable for client-side consumption.
 """
 from rest_framework import serializers
 from .models import User
-from django.core.mail import send_mail
-from django.conf import settings
-import threading
+
 
 # This serializer is used when you want to represent User instances. 
 class UserSerializer(serializers.ModelSerializer):
@@ -38,20 +36,5 @@ class UserRegisterSerializer(serializers.ModelSerializer):
             password=validated_data["password"],
         )
         # Send welcome email after successful user creation
-        send_welcome_email(user)
+        """send_welcome_email(user)""" # Not availbale at the moment 
         return user
-
-
-def send_welcome_email(user):
-    subject = 'Welcome to Our Platform'
-    message = f'Hi {user.username}, thank you for registering in our platform.'
-    email_from = settings.EMAIL_HOST_USER
-    recipient_list = [user.email,]
-    
-    # Define the email sending logic as a separate function
-    def send_email():
-        send_mail(subject, message, email_from, recipient_list)
-
-    # Create and start a thread to send the email
-    email_thread = threading.Thread(target=send_email)
-    email_thread.start()

@@ -25,6 +25,7 @@ SMART/
 |   |   |-- admin.py
 |   |   |-- apps.py
 |   |   |-- forms.py
+|   |   |-- permissions.py
 |   |   |-- serializers.py
 |   |   |-- models.py
 |   |   |-- tests.py
@@ -53,6 +54,23 @@ SMART/
 |   |   |-- profile.js
 |   |   |-- update_introduction.js
 
+fastapi_services/
+│
+├── app/                   # Main application package
+│   ├── __init__.py        # Initializes Python package
+│   ├── main.py            # Entry point to the FastAPI app
+│   ├── dependencies.py    # Dependency-related stuff (e.g., get database session)
+│   ├── settings.py        # Configuration settings, e.g., reading from .env
+│   ├── email_service/     # Email sending functionality
+│   │   ├── __init__.py
+│   │   └── email_sender.py # Contains email sending logic
+│   └── storage_service/   # AWS S3 storage functionality
+│       ├── __init__.py
+│       └── s3_uploader.py # Contains AWS S3 upload logic
+│
+├── .env                   # Environment variables
+├── requirements.txt       # Project dependencies
+└── README.md
 
 
 
