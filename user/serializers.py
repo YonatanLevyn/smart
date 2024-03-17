@@ -38,3 +38,5 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         # Send welcome email after successful user creation
         """send_welcome_email(user)""" # Not availbale at the moment 
         return user
+
+
